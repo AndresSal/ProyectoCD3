@@ -30,7 +30,7 @@ public class NodoPrincipal
     public static void main (String args[]) throws IOException, InterruptedException
     {
         boolean check = true;
-        new ThreadS().start();
+        ThreadS S = new ThreadS();
         
         while(check)
         {            
@@ -52,7 +52,7 @@ public class NodoPrincipal
                     String direccion=hostnames.get(i);
                     try
                     {
-                        new ThreadS().start();
+                        S.start();
                         new ThreadC(InetAddress.getByName(direccion)).start();
                     }
                     catch(Exception e)

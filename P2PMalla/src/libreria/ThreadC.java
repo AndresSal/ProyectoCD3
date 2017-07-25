@@ -46,6 +46,7 @@ public class ThreadC extends Thread
             System.out.println("Conexion exitosa con el servidor: "+address.toString());
             BufferedReader stdIn = new BufferedReader(new InputStreamReader(System.in));
             String input =stdIn.readLine();
+            input = "HOLA SERVIDOR";
             buf = input.getBytes();
             DatagramPacket packet = new DatagramPacket(buf, buf.length, address, 5000);
             socket.send(packet);

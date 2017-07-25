@@ -46,6 +46,7 @@ public class ThreadS extends Thread{
                 BufferedReader StdIn = new BufferedReader(new InputStreamReader(System.in));
                 String input;
                 input=StdIn.readLine();
+                input="Hola Cliente";
                 buf = input.getBytes();
                 
                 InetAddress address = packet.getAddress();
