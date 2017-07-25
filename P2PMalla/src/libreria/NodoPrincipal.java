@@ -16,6 +16,7 @@ import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 
+
 /**
  *
  * @author andres
@@ -28,32 +29,40 @@ public class NodoPrincipal
 
     public static void main (String args[]) throws IOException, InterruptedException
     {
-        boolean listening = true;
-
-        while(listening)
+        boolean check = true;
+        new ThreadS().start();
+        
+        while(check)
         {            
             AddressThread ThA = new AddressThread();
             CheckThread ThC = new CheckThread();
+            ThA.start();
+            ThC.start();
             ThA.join();
             ThC.join();
             
-            new ThreadS().start();
-            
+            System.out.println("Lista de direcciones: ");
             for (int i=0;i<hostnames.size();i++)
             {
-                String direccion=hostnames.get(i);
-                try    
-                {
-                    ThreadC C = new ThreadC(direccion);
-                    System.out.println("Este nodo ha establecido conexión con el Servidor:"+direccion);
-                    C.start();                    
-                }
-                catch(Exception e)
-                {
-                    System.out.println("No se pudo establecer conexion con el Servidor: "+direccion);
-                }
+                System.out.println(hostnames.get(i));
             }
+            
+                for (int i=0;i<hostnames.size();i++)
+                {
+                    String direccion=hostnames.get(i);
+                    try
+                    {
+                        new ThreadS().start();
+                        new ThreadC(InetAddress.getByName(direccion)).start();
+                    }
+                    catch(Exception e)
+                    {
+                        System.out.println("No pudo conectarse a la dirección: "+direccion);
+                    }
+                }
+            
         }
+        
         
     }
     

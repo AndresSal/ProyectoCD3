@@ -24,7 +24,7 @@ public class AddressThread extends Thread
     {
         try
         {
-            Thread.sleep(10000);
+            Thread.sleep(5000);
         }
         catch(Exception e)
         {
@@ -36,7 +36,7 @@ public class AddressThread extends Thread
     {
         try
         {
-            IPSearch("192.168.100");
+            IPSearch("192.168.1");
         }
         catch(Exception e)
         {
@@ -52,9 +52,9 @@ public class AddressThread extends Thread
         {
             String host = subnet + "." + i;
             if (InetAddress.getByName(host).isReachable(timeout) && !(host.equals(myIP)))
-            //if (host.equals(myIP))
             {
                 System.out.println(host + " is reachable");
+                if(!(NodoPrincipal.getDirecciones().contains(host+"/"+i)))
                 NodoPrincipal.setDirecciones(host+"/"+i);
             }
         }     

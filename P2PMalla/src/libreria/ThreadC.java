@@ -29,19 +29,22 @@ public class ThreadC extends Thread
     InetAddress address = null; 
     byte buf[];
     
-    public ThreadC(String host) throws SocketException, UnknownHostException
+    public ThreadC(InetAddress host) throws SocketException, UnknownHostException
     {
      socket = new DatagramSocket();
      buf = new byte [256];
-     address = InetAddress.getByName(host);
+     address = host;
     }
     
     
     public void run()
     {
-        try (BufferedReader stdIn = new BufferedReader(new InputStreamReader(System.in)))
+        while(true)
         {
-            
+        try 
+        {
+            System.out.println("Conexion exitosa con el servidor: "+address.toString());
+            BufferedReader stdIn = new BufferedReader(new InputStreamReader(System.in));
             String input =stdIn.readLine();
             buf = input.getBytes();
             DatagramPacket packet = new DatagramPacket(buf, buf.length, address, 5000);
@@ -55,6 +58,7 @@ public class ThreadC extends Thread
             socket.close();
         } catch (Exception ex) {
             ex.printStackTrace();
+        }
         }
     }
     

@@ -39,6 +39,10 @@ public class ThreadS extends Thread{
                 DatagramPacket packet = new DatagramPacket(buf,buf.length);
                 socket.receive(packet);
                 
+                String reader = new String(packet.getData(), 0, packet.getLength());
+                System.out.println("El cliente "+packet.getAddress()+" dice: "+reader);
+                System.out.println("Preparando para escribir...");
+                
                 BufferedReader StdIn = new BufferedReader(new InputStreamReader(System.in));
                 String input;
                 input=StdIn.readLine();

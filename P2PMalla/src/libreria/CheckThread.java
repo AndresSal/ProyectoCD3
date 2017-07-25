@@ -5,8 +5,12 @@
  */
 package libreria;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -20,7 +24,7 @@ public class CheckThread extends Thread
     {
         try
         {
-            Thread.sleep(10000);
+            Thread.sleep(5000);
             Input=NodoPrincipal.getDirecciones();
         }
         catch(Exception e)
@@ -31,10 +35,14 @@ public class CheckThread extends Thread
     
     public void run ()
     {
-        Clasificar();
+        try {
+            Clasificar();
+        } catch (UnknownHostException ex) {
+            Logger.getLogger(CheckThread.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
-    public void Clasificar ()
+    public void Clasificar () throws UnknownHostException
     {
         for(int i=0;i<Input.size();i++)
         {
